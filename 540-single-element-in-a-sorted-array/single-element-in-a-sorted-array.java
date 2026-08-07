@@ -14,6 +14,6 @@ class Solution {
                 r=m;
             }
         }
-        return arr[l];
+        return arr[r];
     }
 }

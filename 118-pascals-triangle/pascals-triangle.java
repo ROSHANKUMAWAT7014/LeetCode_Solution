@@ -1,21 +1,21 @@
 import java.util.*;
 class Solution {
     public List<List<Integer>> generate(int n) {
-        List<List<Integer>> a = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
         for(int i=0;i<n;i++){
-            List<Integer> row = new ArrayList<>();
-            row.add(1);
+            List<Integer> l = new ArrayList<>();
+            l.add(1);
             for(int j=1;j<=i;j++){
                 if(j==0||j==i){
-                    row.add(1);
+                    l.add(1);
                 }
                 else{
-                    int sum = a.get(i - 1).get(j - 1) + a.get(i - 1).get(j);
-                    row.add(sum);
+                    int sum = ans.get(i - 1).get(j - 1) + ans.get(i - 1).get(j);
+                    l.add(sum);
                 }
             }
-            a.add(row);
+            ans.add(l);
         }
-        return a;
+        return ans;
     }
 }

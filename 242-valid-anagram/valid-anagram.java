@@ -1,5 +1,8 @@
+//Done by myself
+
 class Solution {
     public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
         Map<Character,Integer> mp =new HashMap<>();
         for(int i=0;i<s.length();i++){
             mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1);
@@ -13,3 +16,22 @@ class Solution {
         return mp.equals(mp1);
     }
 }
+
+//More Optimal way
+
+// class Solution {
+//     public boolean isAnagram(String s, String t) {
+//         if (s.length() != t.length()) return false;
+        
+//         int[] count = new int[26];
+//         for (int i = 0; i < s.length(); i++) {
+//             count[s.charAt(i) - 'a']++;
+//             count[t.charAt(i) - 'a']--;
+//         }
+        
+//         for (int c : count) {
+//             if (c != 0) return false;
+//         }
+//         return true;
+//     }
+// }

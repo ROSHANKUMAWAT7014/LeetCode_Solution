@@ -7,7 +7,7 @@ class Solution {
         int ans =end;
         while(st<=end){
             long t=0;
-            int mid= st+(end-st)/2;
+            int mid= (st+end)/2;
             for(int i=0;i<=n;i++){
                 t+=((long)piles[i]+mid-1)/mid;
             }

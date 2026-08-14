@@ -6,7 +6,7 @@ class Solution {
         for(int i:arr){
             list.add(i);
         }
-        for (int a = 1; a < max + k; a++) {
+        for (int a = 1; a <=max + k; a++) {
             if (!list.contains(a)) {
                 cnt++; 
             }
@@ -14,6 +14,6 @@ class Solution {
                 return a;
             }
         }
-        return k+max;
+        return -1;
     }
 }

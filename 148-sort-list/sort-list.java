@@ -10,42 +10,43 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        if(head==null || head.next==null){
+        if(head == null || head.next==null){
             return head;
         }
-        ListNode m=getmid(head);
-        ListNode left =sortList(head);
-        ListNode right =sortList(m);
+        ListNode mid = getmid(head);
+        ListNode left=sortList(head);
+        ListNode right =sortList(mid);
 
-        return mergeTwoLists(left,right);
+        return merge(left,right);
     }
-    ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    ListNode merge(ListNode l1,ListNode l2){
         ListNode dummy = new ListNode();
-        ListNode ans=dummy;
-        while(list1!=null && list2!=null){
-            if(list1.val<=list2.val){
-                ans.next=list1;
-                list1=list1.next;
+        ListNode ans =dummy;
+
+        while(l1 !=null && l2 !=null){
+            if(l1.val<=l2.val){
+                ans.next=l1;
+                l1=l1.next;
                 ans=ans.next;
             }
             else{
-                ans.next=list2;
-                list2=list2.next;
+                ans.next=l2;
+                l2=l2.next;
                 ans=ans.next;
             }
         }
-        ans.next=(list1!=null)? list1:list2;
+        ans.next=(l2==null)?l1:l2;
         return dummy.next;
     }
-
-    ListNode getmid(ListNode head) {
-    ListNode midPrev = null;
-    while (head != null && head.next != null) {
-        midPrev = (midPrev == null) ? head : midPrev.next;
-        head = head.next.next;
-    }
-    ListNode mid = midPrev.next;
-    midPrev.next = null;
-    return mid;
+    ListNode getmid(ListNode head){
+        ListNode midprev=null;
+        while(head!=null && head.next!=null){
+            midprev=(midprev == null)?head:midprev.next;
+            head=head.next.next;
+        }
+        
+        ListNode mid =midprev.next;
+        midprev.next=null;
+        return mid;
     }
 }

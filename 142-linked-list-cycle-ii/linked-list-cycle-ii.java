@@ -13,7 +13,6 @@ public class Solution {
     public ListNode detectCycle(ListNode head) {
         ListNode slow =head;
         ListNode fast =head;
-        Map<ListNode,Integer> mp =new HashMap<>();
        
         while(fast!=null && fast.next!=null){
             slow=slow.next;

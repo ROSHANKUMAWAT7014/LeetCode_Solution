@@ -20,7 +20,7 @@ class Solution {
             head=head.next;
             headSecond=headSecond.next;
         }
-        reverseList(rereverseHead);
+        
         return head==null || headSecond==null;
     }
      public ListNode reverseList(ListNode head) {

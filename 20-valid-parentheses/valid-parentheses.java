@@ -6,16 +6,15 @@ class Solution {
         st.push(c);
     } else {
         if (st.isEmpty()) return false;
-        char top = st.peek();
+        char top = st.pop();
         if ((c == ')' && top == '(') || 
             (c == ']' && top == '[') || 
             (c == '}' && top == '{')) {
-            st.pop();
-        } else {
-            return false; // Mismatched bracket
+                continue;
+            }
+            return false;
         }
     }
-}
-return st.isEmpty();
+    return st.isEmpty();
     }
 }

@@ -10,32 +10,47 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-        int[] ans={-1,-1};
-        if(head==null || head.next==null){
-            return ans;
-        }
-        int minima=Integer.MAX_VALUE;
-        ListNode node =head;
-        ListNode temp=node.next;
-        int idx=2;
-        List<Integer> list =new ArrayList<>();
-        while (temp.next != null) {
-            if ((node.val > temp.val && temp.val < temp.next.val) ||
-                (node.val < temp.val && temp.val > temp.next.val)) {
-                list.add(idx);
-            }
-            idx++;
-            node = node.next;
-            temp = temp.next;
-        }
-        if (list.size() < 2) {
+        if (head == null || head.next == null || head.next.next == null) {
             return new int[]{-1, -1};
         }
-        for (int i = 0; i < list.size() - 1; i++) {
-            minima = Math.min(minima, list.get(i + 1) - list.get(i));
+
+        ListNode prev = head;
+        ListNode curr = head.next;
+        
+        int firstIndex = -1;
+        int lastIndex = -1;
+        int prevIndex = -1;
+        int minDistance = Integer.MAX_VALUE;
+        int index = 1; // 0-indexed position of curr
+
+        while (curr.next != null) {
+            ListNode next = curr.next;
+            
+            // Check if curr is a local maxima or minima
+            if ((curr.val > prev.val && curr.val > next.val) || 
+                (curr.val < prev.val && curr.val < next.val)) {
+                
+                if (firstIndex == -1) {
+                    firstIndex = index;
+                } else {
+                    minDistance = Math.min(minDistance, index - prevIndex);
+                }
+                
+                prevIndex = index;
+                lastIndex = index;
+            }
+
+            prev = curr;
+            curr = next;
+            index++;
         }
 
-        int maxima = list.get(list.size() - 1) - list.get(0);
-        return new int[]{minima,maxima};
+        // If fewer than 2 critical points were found
+        if (firstIndex == lastIndex) {
+            return new int[]{-1, -1};
+        }
+
+        int maxDistance = lastIndex - firstIndex;
+        return new int[]{minDistance, maxDistance};
     }
 }

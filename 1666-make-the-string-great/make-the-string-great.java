@@ -7,7 +7,7 @@ class Solution {
             int a=(int)c;
             if(!st.isEmpty()){
                 int b=(int)st.peek();
-                if(a==b+32 || a==b-32){
+                if(Math.abs(a - b) == 32){
                 st.pop();
                 }
                 else{

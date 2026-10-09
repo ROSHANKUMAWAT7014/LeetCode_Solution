@@ -24,7 +24,7 @@ class Solution {
         queue.offer(root);
         while(!queue.isEmpty()){
             int n = queue.size();
-            Double sum =0.0;
+            long sum =0;
             List<Integer> currLevel = new ArrayList<>(n);
             for(int i=0;i<n;i++){
                 TreeNode currNode = queue.poll();
@@ -37,7 +37,7 @@ class Solution {
                     queue.offer(currNode.right);
                 }
             }
-            result.add(sum/n);
+            result.add((double)sum/n);
        }
         return result;
     }

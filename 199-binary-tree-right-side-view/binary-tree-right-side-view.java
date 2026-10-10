@@ -21,10 +21,12 @@ class Solution {
         q.offer(root);
         while(!q.isEmpty()){
             int n=q.size();
-            List<Integer> currLevel = new ArrayList<>(n);
             for(int i=0;i<n;i++){
                 TreeNode currNode = q.poll();
-                currLevel.add(currNode.val);
+
+                if(i==n-1){
+                    result.add(currNode.val);
+                }
                 if(currNode.left!=null){
                     q.offer(currNode.left);
                 }
@@ -32,7 +34,6 @@ class Solution {
                     q.offer(currNode.right);
                 }
             }
-            result.add(currLevel.get(n-1));
         }
         return result;
     }

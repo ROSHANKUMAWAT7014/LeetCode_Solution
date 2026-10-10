@@ -35,9 +35,8 @@ class Solution {
                     q.offer(currNode.right);
                 }
             }
-            result.add(currLevel);
+            result.add(0,currLevel);
         }
-        Collections.reverse(result);
         return result;
     }
 }

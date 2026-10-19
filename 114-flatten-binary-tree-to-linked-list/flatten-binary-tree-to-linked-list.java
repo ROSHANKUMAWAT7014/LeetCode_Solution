@@ -16,20 +16,24 @@
 class Solution {
     public void flatten(TreeNode root) {
         if(root==null) return;
-        Queue<TreeNode> q= new LinkedList<>();
-        preorder(root,q);
-        root=q.poll();
-        while(!q.isEmpty()){
-            root.left=null;
-            root.right=q.poll();
-            root = root.right;
-        }
-    }
-    private void preorder(TreeNode node,Queue q){
-        if(node == null) return;
 
-        q.offer(node);
-        preorder(node.left,q);
-        preorder(node.right,q);
+        TreeNode curr = root;
+        while(curr!=null){
+            TreeNode l=curr.left;
+            if(l!=null){
+                TreeNode r = l;
+                while(r.right!=null){
+                    r=r.right;
+                }
+                r.right=curr.right;
+
+                curr.right=curr.left;
+
+                curr.left=null;
+
+                curr=curr.right;
+            }
+            else curr=curr.right;
+        }
     }
 }

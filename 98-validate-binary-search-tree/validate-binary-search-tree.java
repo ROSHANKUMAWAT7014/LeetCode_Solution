@@ -27,9 +27,6 @@ class Solution {
         if(high!=null && node.val>=high){
             return false;
         }
-        boolean left=helper(node.left,low,node.val);
-        boolean right=helper(node.right,node.val,high);
-
-        return (left && right);
+        return helper(node.left,low,node.val) && helper(node.right,node.val,high);
     }
 }

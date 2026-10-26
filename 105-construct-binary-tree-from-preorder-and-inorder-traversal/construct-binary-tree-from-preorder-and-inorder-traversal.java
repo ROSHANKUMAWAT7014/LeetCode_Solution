@@ -1,35 +1,23 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
     public TreeNode buildTree(int[] pre, int[] in) {
-        if(pre.length == 0) return null;
-        int r=pre[0];
-        int idx=0;
-
-        for(int i=0;i<in.length;i++){
-            if(in[i]==r){
-                idx= i;
-            }
+        Map<Integer, Integer> inmap = new HashMap<>();
+        for(int i = 0; i < in.length; i++){
+            inmap.put(in[i], i);
         }
-        
-        TreeNode root = new TreeNode(r);
-        root.left =buildTree(Arrays.copyOfRange(pre,1,idx+1),Arrays.copyOfRange(in,0,idx));
+        return build(pre, 0, pre.length - 1, in, 0, in.length - 1, inmap);
+    }
+    
+    private TreeNode build(int[] pre, int preStart, int preEnd, int[] in, int inStart, int inEnd, Map<Integer, Integer> inmap){
+        if(preStart > preEnd || inStart > inEnd) return null;
 
-        root.right =buildTree(Arrays.copyOfRange(pre,idx+1,pre.length),Arrays.copyOfRange(in,idx+1,in.length));
-        
-        return root;
+        TreeNode root = new TreeNode(pre[preStart]);
+
+        int inRoot = inmap.get(root.val);
+        int numsLeft = inRoot - inStart;
+
+        root.left = build(pre, preStart + 1, preStart + numsLeft, in, inStart, inRoot - 1, inmap);
+                          
+        root.right = build(pre, preStart + numsLeft + 1, preEnd, in, inRoot + 1, inEnd, inmap);    
+        return root;   
     }
 }
